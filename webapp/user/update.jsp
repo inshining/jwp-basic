@@ -80,7 +80,7 @@
             <form name="question" method="post" action="/user/create">
                 <div class="form-group">
                     <label for="userId">사용자 아이디</label>
-                    <input class="form-control" id="userId" name="userId" value="${requestScope.user.userId}">
+                    <input class="form-control" id="userId" type="hidden" name="userId" value="${requestScope.user.userId}">
                 </div>
                 <div class="form-group">
                     <label for="password">비밀번호</label>
