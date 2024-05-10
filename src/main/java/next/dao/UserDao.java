@@ -12,14 +12,14 @@ import next.model.User;
 
 public class UserDao {
     public void insert(User user) throws SQLException {
-        InsertJdbcTemplate insertJdbcTemplate = new InsertJdbcTemplate() {
+        JdbcTemplate insertJdbcTemplate = new JdbcTemplate() {
             @Override
-            public String createQueryForInsert() {
+            public String createQuery() {
                 return "INSERT INTO USERS VALUES (?, ?, ?, ?)";
             }
 
             @Override
-            public void setValueForInsert(PreparedStatement pstmt, User user) throws SQLException {
+            public void setValues(PreparedStatement pstmt, User user) throws SQLException {
                 pstmt.setString(1, user.getUserId());
                 pstmt.setString(2, user.getPassword());
                 pstmt.setString(3, user.getName());
@@ -27,13 +27,13 @@ public class UserDao {
                 pstmt.executeUpdate();
             }
         };
-        insertJdbcTemplate.insert(user, this);
+        insertJdbcTemplate.update(user, this);
     }
 
     public void update(User user) throws SQLException {
-        UpdateJdbcTemplate updateJdbcTemplate = new UpdateJdbcTemplate() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate() {
             @Override
-            public void setValuesForUpdate(PreparedStatement pstmt, User user) throws SQLException {
+            public void setValues(PreparedStatement pstmt, User user) throws SQLException {
                 pstmt.setString(1, user.getPassword());
                 pstmt.setString(2, user.getName());
                 pstmt.setString(3, user.getEmail());
@@ -42,11 +42,11 @@ public class UserDao {
             }
 
             @Override
-            public String createQueryForUpdate() {
+            public String createQuery() {
                 return "UPDATE USERS SET password=?, name=?, email=? WHERE userid=?";
             }
         };
-        updateJdbcTemplate.update(user, this);
+        jdbcTemplate.update(user, this);
     }
 
     public List<User> findAll() throws SQLException {
