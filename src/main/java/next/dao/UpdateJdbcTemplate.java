@@ -7,8 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UpdateJdbcTemplate {
-    public static void update(User user, UserDao userDao) throws SQLException {
+public abstract class UpdateJdbcTemplate {
+    public void update(User user, UserDao userDao) throws SQLException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -26,4 +26,6 @@ public class UpdateJdbcTemplate {
             }
         }
     }
+    public abstract void setValuesForUpdate(PreparedStatement pstmt, User user) throws SQLException;
+    public abstract String createQueryForUpdate();
 }
