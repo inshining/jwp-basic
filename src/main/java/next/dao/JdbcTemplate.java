@@ -16,6 +16,7 @@ public abstract class JdbcTemplate {
             String sql = query;
             pstmt = con.prepareStatement(sql);
             setValues(pstmt);
+
         } finally {
             if (pstmt != null) {
                 pstmt.close();
