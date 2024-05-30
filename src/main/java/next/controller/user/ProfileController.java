@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import core.mvc.Controller;
 import next.dao.UserDao;
 import next.model.User;
+import next.view.JspView;
 import next.view.View;
 
 public class ProfileController implements Controller {
@@ -18,6 +19,6 @@ public class ProfileController implements Controller {
             throw new NullPointerException("사용자를 찾을 수 없습니다.");
         }
         req.setAttribute("user", user);
-        return "/user/profile.jsp";
+        return new JspView("/user/profile.jsp");
     }
 }

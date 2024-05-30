@@ -7,6 +7,7 @@ import core.mvc.Controller;
 import next.controller.UserSessionUtils;
 import next.dao.UserDao;
 import next.model.User;
+import next.view.JspView;
 import next.view.View;
 
 public class UpdateFormUserController implements Controller {
@@ -20,6 +21,6 @@ public class UpdateFormUserController implements Controller {
             throw new IllegalStateException("다른 사용자의 정보를 수정할 수 없습니다.");
         }
         req.setAttribute("user", user);
-        return "/user/updateForm.jsp";
+        return  new JspView("/user/updateForm.jsp");
     }
 }

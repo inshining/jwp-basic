@@ -8,6 +8,7 @@ import core.mvc.Controller;
 import next.controller.UserSessionUtils;
 import next.dao.UserDao;
 import next.model.User;
+import next.view.JspView;
 import next.view.View;
 
 public class LoginController implements Controller {
@@ -19,15 +20,15 @@ public class LoginController implements Controller {
         User user = userDao.findByUserId(userId);
         if (user == null) {
             req.setAttribute("loginFailed", true);
-            return "/user/login.jsp";
+            return new JspView("/user/login.jsp");
         }
         if (user.matchPassword(password)) {
             HttpSession session = req.getSession();
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
-            return "redirect:/";
+            return new JspView("redirect:/");
         } else {
             req.setAttribute("loginFailed", true);
-            return "/user/login.jsp";
+            return new JspView("/user/login.jsp");
         }
     }
 }

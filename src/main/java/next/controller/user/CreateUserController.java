@@ -3,6 +3,7 @@ package next.controller.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import next.view.JspView;
 import next.view.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,6 @@ public class CreateUserController implements Controller {
 
         UserDao userDao = new UserDao();
         userDao.insert(user);
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }
