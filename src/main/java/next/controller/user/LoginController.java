@@ -8,10 +8,11 @@ import core.mvc.Controller;
 import next.controller.UserSessionUtils;
 import next.dao.UserDao;
 import next.model.User;
+import next.view.View;
 
 public class LoginController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
         UserDao userDao = new UserDao();

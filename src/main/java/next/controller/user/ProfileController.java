@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import core.mvc.Controller;
 import next.dao.UserDao;
 import next.model.User;
+import next.view.View;
 
 public class ProfileController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String userId = req.getParameter("userId");
         UserDao userDao = new UserDao();
         User user = userDao.findByUserId(userId);

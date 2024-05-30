@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import core.mvc.Controller;
 import next.controller.UserSessionUtils;
 import next.dao.UserDao;
+import next.view.View;
 
 public class ListUserController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         if (!UserSessionUtils.isLogined(req.getSession())) {
             return "redirect:/users/loginForm";
         }
