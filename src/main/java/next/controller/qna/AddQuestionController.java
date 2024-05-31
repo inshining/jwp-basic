@@ -4,6 +4,7 @@ import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import next.dao.QuestionDao;
 import next.model.Question;
+import next.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,17 +20,26 @@ public class AddQuestionController extends AbstractController {
 
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
-        Question question = new Question(req.getParameter("writer"), req.getParameter("title"), req.getParameter("contents"));
-        log.debug("question : {}", question);
         if (!isLogin(req)){
             return jspView(UserLoginJsp);
         }
+
+        String userName = getUserName(req);
+        Question question = new Question(userName, req.getParameter("title"), req.getParameter("contents"));
+        log.debug("question : {}", question);
+
         Question savedQuestion = questionDao.insert(question);
         return jspView("redirect:/");
     }
 
     private boolean isLogin(HttpServletRequest req) {
-        HttpSession session =req.getSession();
+        HttpSession session = req.getSession();
         return session.getAttribute("user") != null;
+    }
+
+    private String getUserName(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        return user.getUserId();
     }
 }
