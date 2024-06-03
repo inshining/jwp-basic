@@ -49,6 +49,10 @@ public class Question {
         return createdDate;
     }
 
+    public void increaseCountOfComment() {
+        this.countOfComment++;
+    }
+
     public long getTimeFromCreateDate() {
         return this.createdDate.getTime();
     }
